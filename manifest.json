@@ -1,0 +1,36 @@
+{
+    "manifest_version": 3,
+    "version": "1.1",
+    "name": "Tabsaver",
+
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "icon.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+     
+    "background": {
+        "service_worker": "service-worker.js"
+    },
+
+    "commands": {
+        "show-alert": {
+            "description": "show alert",
+            "suggested_key": {
+            "default": "Alt+2"
+            }
+        },
+        "_execute_action": {
+            "description": "This hotkey can quickly open the extension. (same as you click extension by mouse.)",
+            "suggested_key": {
+            "default": "Alt+1"
+            }
+        }
+    }
+}
