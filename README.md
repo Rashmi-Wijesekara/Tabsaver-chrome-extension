@@ -10,7 +10,7 @@
 <br>
 
 ## How to install the extension?
---- 
+
 1) Download & extract the zip folder
 
 <img src="images/screenshots/2.png" width= "600px"/>
