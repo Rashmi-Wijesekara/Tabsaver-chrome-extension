@@ -3,9 +3,8 @@
 <center>
 <img src="images/screenshots/1.png" width= "300px"/>
 <p>version 1.1</p>
-
-<br>
 </center>
+<br>
 
 ## How to install the extension?
 --- 
