@@ -70,4 +70,10 @@
 
 <img src="images/screenshots/13.png" width= "600px"/>
 <img src="images/screenshots/14.png" width= "600px"/>
+
+<br>
+
+- Double click on the "DELETE ALL" button to delete all the saved tabs 
+
+<img src="images/screenshots/15.png" width= "600px"/>
 <br>
