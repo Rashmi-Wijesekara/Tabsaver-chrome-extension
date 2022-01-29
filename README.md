@@ -51,7 +51,7 @@
 <br>
 
 ## How to use the extension?
---- 
+
 - You can manually enter any URL in the input field & click on the "SAVE INPUT" button
 
 <img src="images/screenshots/10.png" width= "400px"/>
