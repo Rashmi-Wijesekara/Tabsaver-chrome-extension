@@ -5,6 +5,8 @@ const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
 const tabBtn = document.getElementById("tab-btn")
+const arrowUp = document.getElementById("arrow-up")
+const arrowDown = document.getElementById("arrow-down")
 
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
@@ -22,6 +24,16 @@ deleteBtn.addEventListener("dblclick", function() {
     displayMsg("All the tabs have been deleted", 0)
 })
 
+// change the order of the tabs displaying
+arrowUp.addEventListener("click", function() {
+    ulEl.innerHTML = ""
+    render_Last_at_first(myLeads)
+})
+
+arrowDown.addEventListener("click", function() {
+    ulEl.innerHTML = ""
+    render(myLeads)
+})
 
 // show all the tabs in the saved order
 function render(leads)

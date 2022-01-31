@@ -85,6 +85,7 @@ ul {
     margin-top: 20px;
     list-style: none;
     padding-left: 0;
+    max-width: 375px;
 }
 
 li {
@@ -95,15 +96,23 @@ li {
 li a { 
     /* apply only for the a tags inside the li tags */
     color: #5f9341;
-    line-height: 0.6rem;
+    line-height: 0.9rem;
+
 }
 
 li a:hover {
     color: #19350a;
     background-color: #9ae270;
-    font-size: 13px;
     font-weight: bold;
     margin-top: 2px;
+
+    /* limit the length of the tab title */
+    max-width: 375px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .alert-msg{
@@ -117,4 +126,27 @@ li a:hover {
     justify-content: center;
     text-align: center;
     margin-top: 1rem;
+}
+
+/* ALL TABS upper section */
+.all-tabs-with-arrows {
+    display: flex;
+}
+
+.all-tabs-title {
+    padding-top: 0;
+    margin: 0;
+}
+.arrows-set {
+    margin-left: auto;
+    display: block;
+    align-items: center;
+    justify-items: center;
+}
+
+.arrows-set .icon {
+    width: 25px;
+}
+.arrows-set .icon:hover {
+    cursor: pointer;
 }
