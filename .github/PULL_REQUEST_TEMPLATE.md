@@ -1,12 +1,3 @@
----
-name: Pull Request
-about: use when merging branches into the main branch
-title: ''
-labels: ''
-assignees: ''
-
----
-
 # Story Title
 
 [This is the Issue Title](https://github.com/username/repository-name/issues/1)
