@@ -31,7 +31,6 @@ debug(localStorage.getItem("myLeads")) ==> will work
 
 let myLeads = []
 
-// const variables cannot reassign
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
@@ -39,8 +38,6 @@ const deleteBtn = document.getElementById("delete-btn")
 const tabBtn = document.getElementById("tab-btn")
 
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
-
-
 
 if(leadsFromLocalStorage){
     myLeads = leadsFromLocalStorage
@@ -57,9 +54,8 @@ tabBtn.addEventListener("click", function() {
 
         const tabData = {url:activeTab.url, title:activeTab.title}
         myLeads.push(tabData)
-
         localStorage.setItem("myLeads", JSON.stringify(myLeads))
-
+        
         debug(localStorage.getItem("myLeads"))
 
         //render(myLeads)    

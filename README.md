@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  version 1.1
+  version 1.0
 </p>
 <br>
 
@@ -66,7 +66,7 @@
 
 <br>
 
-- Click on the "SAVE TAB" button to save the current active tab
+- Click on the "SAVE TAB" button to save the currently active tab
 
 <img src="images/screenshots/13.png" width= "600px"/>
 <img src="images/screenshots/14.png" width= "600px"/>
