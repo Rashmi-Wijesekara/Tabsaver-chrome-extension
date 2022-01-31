@@ -30,12 +30,30 @@
             </a>
         </div>
         
-        <h1>All Tabs</h1>
+        <div class="all-tabs-with-arrows">
+            <h1 class="all-tabs-title">All Tabs</h1>
+            
+            <div class="arrows-set">
+                <img class="icon" id="arrow-down" src="images/arrow-circle-down-solid.svg">
+                <img class="icon" id="arrow-up" src="images/arrow-circle-up-solid.svg">
+            </div>
+        </div>
 
-        <ul id="ul-el"></ul>
+        <ul id="ul-el">
+            <!-- <li>
+                <div class="tab-item">
+                    <a href= "#" target= "_blank">
+                        https://github.com/Rashmi-Wijesekara/Tabsaver-chrome-extension
+                    </a>
+    
+                    <img class="icon" src="images/trash-alt-solid.svg" width="25px">
+
+                </div>
+            </li> -->
+        </ul>
 
         <div class= "alert-msg" id = "alert-msg" style="visibility:hidden;"></div>
-        
+
         <button id= "delete-btn">DELETE ALL</button>
         
         <script src="js/all-tabs.js"></script>
