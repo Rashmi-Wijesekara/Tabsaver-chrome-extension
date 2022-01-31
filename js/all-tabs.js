@@ -12,7 +12,23 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
 if(leadsFromLocalStorage){
     myLeads = leadsFromLocalStorage
-    render_Last_at_first(myLeads)
+}
+
+// save the chosen order type of the tabs list in the local storage
+// render == 1
+// render_Last_at_first == 2
+const tabsOrder = localStorage.getItem("tabsOrder")
+let orderType = 0 
+
+if(!tabsOrder){
+    localStorage.setItem("tabsOrder", 1)
+    render(myLeads)
+}else {
+    if(tabsOrder == 1){
+        render(myLeads)
+    }else if(tabsOrder == 2){
+        render_Last_at_first(myLeads)
+    }
 }
 
 // Listen for double clicks on the delete button
@@ -28,11 +44,13 @@ deleteBtn.addEventListener("dblclick", function() {
 arrowUp.addEventListener("click", function() {
     ulEl.innerHTML = ""
     render_Last_at_first(myLeads)
+    localStorage.setItem("tabsOrder", 2)
 })
 
 arrowDown.addEventListener("click", function() {
     ulEl.innerHTML = ""
     render(myLeads)
+    localStorage.setItem("tabsOrder", 1)
 })
 
 // show all the tabs in the saved order
@@ -43,9 +61,14 @@ function render(leads)
     for(let i=0; i< leads.length; i++){
         listItems += `
             <li>
-                <a href= "${leads[i].url}" target= "_blank">
-                    ${leads[i].title}
-                </a>
+                <div class="tab-item">
+                    <a href= "${leads[i].url}" target= "_blank">
+                        ${leads[i].title}
+                    </a>
+    
+                    <img class="icon" src="images/trash-alt-solid.svg">
+
+                </div>
             </li>`
     }
     ulEl.innerHTML = listItems
@@ -59,9 +82,14 @@ function render_Last_at_first(leads)
     for(let i = leads.length-1; i>= 0; i--){
         listItems += `
             <li>
-                <a href= "${leads[i].url}" target= "_blank">
-                    ${leads[i].title}
-                </a>
+                <div class="tab-item">
+                    <a href= "${leads[i].url}" target= "_blank">
+                        ${leads[i].title}
+                    </a>
+    
+                    <img class="icon" src="images/trash-alt-solid.svg">
+
+                </div>
             </li>`
     }
     ulEl.innerHTML = listItems

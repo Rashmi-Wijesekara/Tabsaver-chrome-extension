@@ -85,7 +85,6 @@ ul {
     margin-top: 20px;
     list-style: none;
     padding-left: 0;
-    max-width: 375px;
 }
 
 li {
@@ -97,7 +96,7 @@ li a {
     /* apply only for the a tags inside the li tags */
     color: #5f9341;
     line-height: 0.9rem;
-
+    padding: 2px 2px 3px 2px;
 }
 
 li a:hover {
@@ -107,7 +106,7 @@ li a:hover {
     margin-top: 2px;
 
     /* limit the length of the tab title */
-    max-width: 375px;
+    max-width: 390px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -148,5 +147,22 @@ li a:hover {
     width: 25px;
 }
 .arrows-set .icon:hover {
+    cursor: pointer;
+}
+
+/* list of ALL TABS */
+.tab-item {
+    display: flex;
+}
+
+.tab-item a {
+    line-height: 0.9rem;
+}
+
+.tab-item .icon {
+    width: 13px;
+    margin-left: auto;
+}
+.tab-item .icon:hover {
     cursor: pointer;
 }
