@@ -44,6 +44,7 @@ if(leadsFromLocalStorage){
     //render(myLeads)
 }
 
+// SAVE TAB button
 tabBtn.addEventListener("click", function() {
     
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -51,6 +52,10 @@ tabBtn.addEventListener("click", function() {
         // the return variable should only have one entry
         let activeTab = tabs[0]
         //let activeTabId = activeTab.id // or do whatever you need
+
+        if(checkUrl(activeTab.url) === 0){
+            return
+        }
 
         const tabData = {url:activeTab.url, title:activeTab.title}
         myLeads.push(tabData)
@@ -75,8 +80,17 @@ deleteBtn.addEventListener("dblclick", function() {
     debug(localStorage.getItem("myLeads"))
 })
 
-
+// SAVE INPUT button
 inputBtn.addEventListener("click", function() {
+
+    if(inputEl.value == "") {
+        displayMsg("Please enter a URL to save", 0)
+        return
+    }
+
+    if(checkUrl(inputEl.value) === 0){
+        return
+    }
 
     const tabData = {url:inputEl.value, title:inputEl.value}
     myLeads.push(tabData)
@@ -96,6 +110,7 @@ inputBtn.addEventListener("click", function() {
     */
 })
 
+// render through the whole list
 function render(leads)
 {
     let listItems = ""
@@ -134,4 +149,15 @@ function hideMsg(msg)
     var alertmsg = document.getElementById('alert-msg')
     alertmsg.innerHTML = msg
     alertmsg.style.visibility = 'hidden'
+}
+
+// check whether the given URL is already saved before
+function checkUrl(url)
+{
+    for(let i =0; i< myLeads.length; i++){
+        if(myLeads[i].url == url){
+            displayMsg("This URL is already saved before", 0)
+            return 0
+        }
+    }
 }
