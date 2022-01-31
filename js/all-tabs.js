@@ -78,14 +78,3 @@ function hideMsg(msg)
     alertmsg.innerHTML = msg
     alertmsg.style.visibility = 'hidden'
 }
-
-// check whether the given URL is already saved before
-function checkUrl(url)
-{
-    for(let i =0; i< myLeads.length; i++){
-        if(myLeads[i].url == url){
-            displayMsg("This URL is already saved before", 0)
-            return 0
-        }
-    }
-}
