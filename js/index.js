@@ -69,17 +69,6 @@ tabBtn.addEventListener("click", function() {
     displayMsg("Tab is saved successfully", 1)
 })
 
-
-// Listen for double clicks on the delete button
-// When clicked, clear localStorage, myLeads, and the DOM
-deleteBtn.addEventListener("dblclick", function() {
-    localStorage.clear()
-    myLeads = []
-    //render(myLeads)
-    displayMsg("All the tabs have been deleted", 0)
-    debug(localStorage.getItem("myLeads"))
-})
-
 // SAVE INPUT button
 inputBtn.addEventListener("click", function() {
 
