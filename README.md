@@ -53,4 +53,4 @@
 
 <br>
 
-## [How to use the extension?]()
+## [How to use the extension?](https://github.com/Rashmi-Wijesekara/Tabsaver-chrome-extension/blob/main/versions/v1.1.0.md)
