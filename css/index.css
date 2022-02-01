@@ -88,22 +88,24 @@ ul {
 }
 
 li {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 12px;
+    border-bottom: 1px solid grey;
 }
 
 li a { 
     /* apply only for the a tags inside the li tags */
     color: #5f9341;
     line-height: 0.9rem;
-    padding: 2px 2px 3px 2px;
+    padding: 2px 2px 1px 2px;
+    text-decoration: none;
+    margin-bottom: 5px;
 }
 
 li a:hover {
     color: #19350a;
     background-color: #9ae270;
     font-weight: bold;
-    margin-top: 2px;
 
     /* limit the length of the tab title */
     max-width: 390px;
