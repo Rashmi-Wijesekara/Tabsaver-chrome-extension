@@ -1,3 +1,24 @@
+// for debugging in the current page's console
+/*************************************************** */
+
+function debug(cmdName){
+    chrome.storage.sync.set({msg: cmdName}) 
+    
+    // You can not get the context on the function, so using the Storage API to help you. 
+    // https://developer.chrome.com/docs/extensions/reference/storage/ 
+
+    chrome.tabs.query({active: true, currentWindow: true}).then(([tab])=>{ 
+        chrome.scripting.executeScript({ 
+            target: {tabId: tab.id}, 
+            function: () => { 
+                chrome.storage.sync.get(['msg'], ({msg})=> { 
+                    console.log(`${msg}`) 
+                }) 
+            } 
+        }) 
+    }) 
+}
+
 let myLeads = []
 
 const inputEl = document.getElementById("input-el")
@@ -7,7 +28,9 @@ const deleteBtn = document.getElementById("delete-btn")
 const tabBtn = document.getElementById("tab-btn")
 const arrowUp = document.getElementById("arrow-up")
 const arrowDown = document.getElementById("arrow-down")
+const allTabsSection = document.getElementById("all-tabs")
 
+let deleteIconSet = []
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
 if(leadsFromLocalStorage){
@@ -53,12 +76,50 @@ arrowDown.addEventListener("click", function() {
     localStorage.setItem("tabsOrder", 1)
 })
 
+
+// generate separate eventListeners for each tab deleting icon
+// this function is called everytime when the list is loaded
+// otherwise after changing the list order, tabs cannot be deleted
+// because the id name of each delete icon was changed when the order changed
+function tabDeletingEvents()
+{
+    for(let i =0; i<deleteIconSet.length; i++){
+        let iconName = deleteIconSet[i]
+        icon = document.getElementById(iconName)
+
+        icon.addEventListener("click", function() {
+            
+            debug(deleteIconSet[i])
+
+            // get the substring of the iconName after the '-' symbol
+            let index = parseInt(iconName.substring(iconName.indexOf('-') + 1))
+
+            // remove the selected tab from myLeads array & update it in the local storage
+            myLeads.splice(index, 1)
+            localStorage.setItem("myLeads", JSON.stringify(myLeads))
+
+            // check the last selected order type of the tabs list & render the list again according to that type
+            checkTabsOrder()
+        })
+    }
+}
+
+// delete only one tab
+function deleteTab(icon) {
+    let index = parseInt(icon.charAt(icon.length - 1))
+    myLeads.splice(index, 1)
+    checkTabsOrder()
+}
+
 // show all the tabs in the saved order
 function render(leads)
 {
     let listItems = ""
+    deleteIconSet = []
 
     for(let i=0; i< leads.length; i++){
+        iconId = "icon-" + i
+
         listItems += `
             <li>
                 <div class="tab-item">
@@ -66,20 +127,28 @@ function render(leads)
                         ${leads[i].title}
                     </a>
     
-                    <img class="icon" src="images/trash-alt-solid.svg">
+                    <img class="icon" id="${iconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
 
                 </div>
             </li>`
+        
+        deleteIconSet.push(iconId)
     }
     ulEl.innerHTML = listItems
+
+    debug(deleteIconSet)
+    tabDeletingEvents()
 }
 
 // show all the tabs in a way that the last saved tab is on the top
 function render_Last_at_first(leads)
 {
     let listItems = ""
+    deleteIconSet = []
 
     for(let i = leads.length-1; i>= 0; i--){
+        iconId = "icon-" + i
+
         listItems += `
             <li>
                 <div class="tab-item">
@@ -87,12 +156,30 @@ function render_Last_at_first(leads)
                         ${leads[i].title}
                     </a>
     
-                    <img class="icon" src="images/trash-alt-solid.svg">
+                    <img class="icon" id="${iconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
 
                 </div>
             </li>`
+        
+        deleteIconSet.push(iconId)
     }
     ulEl.innerHTML = listItems
+
+    debug(deleteIconSet)
+    tabDeletingEvents()
+}
+
+// check the order of the tabs list later on
+function checkTabsOrder() {
+    let order = localStorage.getItem("tabsOrder")
+
+    if(order == 1){
+        render(myLeads)
+    }else if(order == 2){
+        render_Last_at_first(myLeads)
+    }else {
+        displayMsg("Something went wrong", 0)
+    }
 }
 
 //display the message

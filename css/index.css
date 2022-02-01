@@ -165,4 +165,5 @@ li a:hover {
 }
 .tab-item .icon:hover {
     cursor: pointer;
+    content: url(../images/trash-alt-solid-red.svg)
 }
