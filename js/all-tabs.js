@@ -168,6 +168,7 @@ function render(leads)
         listItems += `
             <li>
                 <div class="tab-item">
+                    <img class="favicon" alt="favicon" src="${leads[i].icon}">
                     <a href= "${leads[i].url}" target= "_blank">
                         ${leads[i].title}
                     </a>

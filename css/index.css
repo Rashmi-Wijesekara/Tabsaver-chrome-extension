@@ -184,3 +184,10 @@ li a:hover {
     cursor: pointer;
     content: url(../images/edit-black.svg);
 }
+
+.favicon {
+    height: 0.85rem;
+    width: auto;
+    margin-bottom: -5px;
+    margin-right: 5px;
+}

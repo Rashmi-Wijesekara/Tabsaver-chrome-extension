@@ -79,7 +79,7 @@ tabBtn.addEventListener("click", function() {
             return
         }
 
-        const tabData = {url:activeTab.url, title:activeTab.title}
+        const tabData = {url:activeTab.url, title:activeTab.title, icon:activeTab.favIconUrl}
         myLeads.push(tabData)
         localStorage.setItem("myLeads", JSON.stringify(myLeads))
         
@@ -102,7 +102,8 @@ inputBtn.addEventListener("click", function() {
         return
     }
 
-    const tabData = {url:inputEl.value, title:inputEl.value}
+    const favIcon = 'images/link-icon.svg'
+    const tabData = {url:inputEl.value, title:inputEl.value, icon:favIcon}
     myLeads.push(tabData)
     
     localStorage.setItem("myLeads", JSON.stringify(myLeads))
