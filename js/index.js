@@ -39,14 +39,36 @@ const tabBtn = document.getElementById("tab-btn")
 
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
+avoidChrome() 
+
 if(leadsFromLocalStorage){
     myLeads = leadsFromLocalStorage
     //render(myLeads)
 }
 
+// check whether the currenly active tab can be accessed or not
+// if cannot, redirect to the error page
+function avoidChrome() {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        let currentTab = tabs[0]
+        let checkurl = currentTab.url
+
+        let suburl = checkurl.substring(0,9)
+        let chrome = 'chrome://'
+
+            // document.body.innerHTML = ""
+        if(suburl.localeCompare(chrome) === 0){
+            window.location.href = '/error.html'
+            return 1
+        }
+        else
+            return 0
+    })
+}
+
+
 // SAVE TAB button
 tabBtn.addEventListener("click", function() {
-    
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         // since only one tab should be active and in the current window at once
         // the return variable should only have one entry
@@ -71,7 +93,6 @@ tabBtn.addEventListener("click", function() {
 
 // SAVE INPUT button
 inputBtn.addEventListener("click", function() {
-
     if(inputEl.value == "") {
         displayMsg("Please enter a URL to save", 0)
         return
@@ -92,29 +113,7 @@ inputBtn.addEventListener("click", function() {
     inputEl.value = ""
     debug(localStorage.getItem("myLeads"))
     
-    /*
-    const li = document.createElement("li")
-    li.textContent = input
-    ulEl.append(li)
-    */
 })
-
-// render through the whole list
-function render(leads)
-{
-    let listItems = ""
-    for(let i=0; i< leads.length; i++){
-        //listItems += "<li><a href= '"+ myLeads[i] +"' target= '_blank'>"+ myLeads[i]+ "</a></li>"
-        //template string
-        listItems += `
-            <li>
-                <a href= "${leads[i].url}" target= "_blank">
-                    ${leads[i].title}
-                </a>
-            </li>`
-    }
-    ulEl.innerHTML = listItems
-}
 
 //display the message
 function displayMsg(msg, type)
