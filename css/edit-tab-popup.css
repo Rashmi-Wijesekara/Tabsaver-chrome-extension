@@ -1,0 +1,63 @@
+body {
+		margin: 0;
+		padding: 10px;
+		font-family: Arial, Helvetica, sans-serif;
+		min-width: 400px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+/* The Close Button */
+.close-popup {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+input[type="text"] {
+	width: 80%;
+	margin: 0 0 1rem 1rem;
+}
+
+label {
+	font-weight: bold;
+}
+
+#edit-save-btn {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#edit-save-btn:hover {
+	cursor: pointer;
+}

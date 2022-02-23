@@ -24,7 +24,7 @@ body {
     align-items: center;
     justify-items: center;
 }
-.icon {
+.icon, .edit {
     width: 1.7rem;
     margin: 0 10px;
     margin-bottom: 5px;
@@ -73,6 +73,9 @@ button {
     font-weight: bold;
     border-radius: 7px;
     font-size: 14px;
+}
+button:hover {
+    cursor: pointer;
 }
 
 #delete-btn {
@@ -159,13 +162,25 @@ li a:hover {
 
 .tab-item a {
     line-height: 0.9rem;
+    width: 100%;
 }
 
 .tab-item .icon {
+    width: 13px;
+    margin-left: 0;
+}
+.tab-item .edit {
     width: 13px;
     margin-left: auto;
 }
 .tab-item .icon:hover {
     cursor: pointer;
-    content: url(../images/trash-alt-solid-red.svg)
+    content: url(../images/trash-alt-solid-red.svg);
+}
+.edit {
+    padding-left: 5px;
+}
+.tab-item .edit:hover {
+    cursor: pointer;
+    content: url(../images/edit-black.svg);
 }
