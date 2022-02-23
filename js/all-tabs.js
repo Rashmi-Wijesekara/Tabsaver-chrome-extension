@@ -30,7 +30,16 @@ const arrowUp = document.getElementById("arrow-up")
 const arrowDown = document.getElementById("arrow-down")
 const allTabsSection = document.getElementById("all-tabs")
 
+const editTabPopup = document.getElementById("edit-tab-popup")
+const closePopup = document.getElementsByClassName("close-popup")[0]
+const titleEdit = document.getElementById("title-edit")
+const urlEdit = document.getElementById("url-edit")
+const editSaveBtn = document.getElementById("edit-save-btn")
+let editIndex = null
+
 let deleteIconSet = []
+let editIconSet = []
+
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
 if(leadsFromLocalStorage){
@@ -85,7 +94,7 @@ function tabDeletingEvents()
 {
     for(let i =0; i<deleteIconSet.length; i++){
         let iconName = deleteIconSet[i]
-        icon = document.getElementById(iconName)
+        let icon = document.getElementById(iconName)
 
         icon.addEventListener("click", function() {
             
@@ -104,6 +113,39 @@ function tabDeletingEvents()
     }
 }
 
+// generate separate eventListeners for each tab editing icon
+function tabEditingEvents() {
+    for(let i=0; i<editIconSet.length; i++) {
+        let iconName = editIconSet[i]
+        let icon = document.getElementById(iconName)
+
+        icon.addEventListener('click', function() {
+            editTabPopup.style.display = 'block'
+            editIndex = parseInt(iconName.substring(iconName.indexOf('-') + 1))
+            
+            let title = myLeads[editIndex].title
+            let url = myLeads[editIndex].url
+            
+            titleEdit.value = title
+            urlEdit.value = url
+        })
+    }
+}
+
+// tab data editing popup
+closePopup.addEventListener('click', function() {
+    editTabPopup.style.display = 'none'
+})
+
+editSaveBtn.addEventListener('click', function() {
+    myLeads[editIndex].title = titleEdit.value
+    myLeads[editIndex].url = urlEdit.value
+
+    localStorage.setItem("myLeads", JSON.stringify(myLeads))
+    editTabPopup.style.display = 'none'
+    checkTabsOrder()
+})
+
 // delete only one tab
 function deleteTab(icon) {
     let index = parseInt(icon.charAt(icon.length - 1))
@@ -116,9 +158,12 @@ function render(leads)
 {
     let listItems = ""
     deleteIconSet = []
+    editIconSet = []
 
     for(let i=0; i< leads.length; i++){
-        iconId = "icon-" + i
+
+        editIconId = "edit-" + i
+        deleteIconId = "delete-" + i
 
         listItems += `
             <li>
@@ -126,18 +171,21 @@ function render(leads)
                     <a href= "${leads[i].url}" target= "_blank">
                         ${leads[i].title}
                     </a>
-    
-                    <img class="icon" id="${iconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
+
+                    <img class="edit" id="${editIconId}" alt="edit icon" src="images/edit.svg">
+                    <img class="icon" id="${deleteIconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
 
                 </div>
             </li>`
         
-        deleteIconSet.push(iconId)
+        deleteIconSet.push(deleteIconId)
+        editIconSet.push(editIconId)
     }
     ulEl.innerHTML = listItems
 
-    debug(deleteIconSet)
+    // debug(editIconSet)
     tabDeletingEvents()
+    tabEditingEvents()
 }
 
 // show all the tabs in a way that the last saved tab is on the top
@@ -145,9 +193,12 @@ function render_Last_at_first(leads)
 {
     let listItems = ""
     deleteIconSet = []
+    editIconSet = []
 
     for(let i = leads.length-1; i>= 0; i--){
-        iconId = "icon-" + i
+
+        editIconId = "edit-" + i
+        deleteIconId = "delete-" + i
 
         listItems += `
             <li>
@@ -155,18 +206,21 @@ function render_Last_at_first(leads)
                     <a href= "${leads[i].url}" target= "_blank">
                         ${leads[i].title}
                     </a>
-    
-                    <img class="icon" id="${iconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
+
+                    <img class="edit" id="${editIconId}" alt="edit icon" src="images/edit.svg">
+                    <img class="icon" id="${deleteIconId}" alt="trash bin icon" src="images/trash-alt-solid.svg">
 
                 </div>
             </li>`
         
-        deleteIconSet.push(iconId)
+        deleteIconSet.push(deleteIconId)
+        editIconSet.push(editIconId)
     }
     ulEl.innerHTML = listItems
 
-    debug(deleteIconSet)
+    // debug(deleteIconSet)
     tabDeletingEvents()
+    tabEditingEvents()
 }
 
 // check the order of the tabs list later on

@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/edit-tab-popup.css">
     </head>
 
     <body>
@@ -67,6 +68,27 @@
 
         <button id= "delete-btn">DELETE ALL</button>
         
+
+        <!-- edit tab data POPUP -->
+
+        <!-- The Modal -->
+        <div id="edit-tab-popup" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close-popup">&times;</span>
+
+                <label for="title-edit">Title</label>
+                <input type="text" id="title-edit"><br>
+                <label for="url-edit">URL</label>
+                <input type="text" id="url-edit">
+
+                <button id="edit-save-btn">SAVE</button>
+            </div>
+        
+        </div>
+
+
         <script src="js/all-tabs.js"></script>
     </body>
 
